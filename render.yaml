@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: projectx
+    runtime: python
+    repo: https://github.com/cooleykendrick7-web/projectx
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app:app --host 0.0.0.0 --port $PORT
+    plan: starter
+    disk:
+      name: projectx-data
+      mountPath: /data
+      sizeGB: 1
+    envVars:
+      - key: PROJECTX_DB
+        value: /data/projectx.db
+      - key: PYTHON_VERSION
+        value: 3.12.0

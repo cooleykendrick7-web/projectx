@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X — Settings</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div class="settings-wrap">
+  <a href="/" class="back">← Back to X</a>
+  <h1><span class="x-logo small">X</span> Settings</h1>
+  {% if saved %}<p class="saved">✓ Saved.</p>{% endif %}
+  <form method="post" action="/settings">
+    <section>
+      <h2>AI key</h2>
+      <p class="muted">Status: <b>{{ key_status }}</b></p>
+      <p class="muted">Free key, no card: openrouter.ai → Keys → paste it here.</p>
+      <input type="password" name="openrouter_key" placeholder="Paste new key (leave blank to keep current)" autocomplete="off">
+    </section>
+    <section>
+      <h2>Brain (model)</h2>
+      <input type="text" name="model" value="{{ model }}" list="model-presets">
+      <datalist id="model-presets">
+        {% for id, label in model_presets %}
+        <option value="{{ id }}">{{ label }}</option>
+        {% endfor %}
+      </datalist>
+      <p class="muted">Free models end in <b>:free</b> — about 50 chats a day free, more after a $10 top-up.</p>
+    </section>
+    <section>
+      <h2>Personality</h2>
+      <div class="persona-btns">
+        {% for pid, p in personas.items() %}
+        <button type="button" class="persona-btn{% if pid == persona %} active{% endif %}" data-pid="{{ pid }}" data-prompt="{{ p.prompt|e }}">{{ p.name }}</button>
+        {% endfor %}
+      </div>
+      <input type="hidden" name="persona" id="persona-field" value="{{ persona }}">
+      <textarea name="system_prompt" id="prompt-area" rows="6">{{ system_prompt }}</textarea>
+      <p class="muted">This is X's instruction sheet — write anything. It obeys this every chat.</p>
+    </section>
+    <section>
+      <h2>Password</h2>
+      <input type="password" name="new_password" placeholder="New password (leave blank to keep)" autocomplete="new-password">
+    </section>
+    <button type="submit" class="save-btn">Save everything</button>
+  </form>
+</div>
+<script>
+document.querySelectorAll('.persona-btn').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    document.querySelectorAll('.persona-btn').forEach(function(b){ b.classList.remove('active'); });
+    btn.classList.add('active');
+    document.getElementById('persona-field').value = btn.dataset.pid;
+    document.getElementById('prompt-area').value = btn.dataset.prompt;
+  });
+});
+</script>
+</body>
+</html>

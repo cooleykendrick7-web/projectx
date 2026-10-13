@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar">
+    <div class="side-head">
+      <span class="x-logo small">X</span>
+      <button id="new-chat" title="New chat">+ New</button>
+    </div>
+    <div id="chat-list"></div>
+    <div class="side-foot">
+      <a href="/settings">⚙ Settings</a>
+      <a href="/logout">↩ Log out</a>
+    </div>
+  </aside>
+  <main id="main">
+    <header id="topbar">
+      <button id="menu-btn">☰</button>
+      <span id="persona-label">X</span>
+      <span id="model-label" class="muted"></span>
+    </header>
+    <div id="key-warning" hidden>
+      ⚠ No AI key yet — <a href="/settings">add your free OpenRouter key in Settings</a> to wake X up.
+    </div>
+    <div id="messages"></div>
+    <div id="composer">
+      <textarea id="input" rows="1" placeholder="Tell X what you want…"></textarea>
+      <button id="send">➤</button>
+    </div>
+  </main>
+</div>
+<script src="/static/app.js"></script>
+</body>
+</html>

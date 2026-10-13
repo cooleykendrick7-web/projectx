@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project X — Private</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="login-body">
+<div class="login-card">
+  <div class="x-logo">X</div>
+  <h1>Project X</h1>
+  <p class="muted">Private. Only you get in.</p>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form method="post" action="/login">
+    <input type="password" name="password" placeholder="Password" autocomplete="current-password" autofocus>
+    <button type="submit">Enter</button>
+  </form>
+</div>
+</body>
+</html>
